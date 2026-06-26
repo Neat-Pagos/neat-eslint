@@ -6,6 +6,25 @@ export = {
   rules: {
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
+    'no-restricted-syntax': [
+      'error',
+      {
+        'selector': 'ForStatement[test=null]',
+        'message': 'Infinite loops via for(;;) are banned. Use a bounded loop condition (e.g. while(!page.empty)).'
+      },
+      {
+        'selector': 'ForStatement[test.type="Literal"][test.value=true]',
+        'message': 'for(;true;) is banned. Use a bounded loop condition.'
+      },
+      {
+        'selector': 'WhileStatement[test.type="Literal"][test.value=true]',
+        'message': 'while(true) is banned. Use a bounded loop condition.'
+      },
+      {
+        'selector': 'DoWhileStatement[test.type="Literal"][test.value=true]',
+        'message': 'do...while(true) is banned. Use a bounded loop condition.'
+      }
+    ],
     'max-len': [
       'error',
       {
